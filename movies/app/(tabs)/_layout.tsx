@@ -38,7 +38,7 @@ export default function TabLayout() {
               headerShown: false,
               tabBarIcon: ({ focused }) =>
                 focused ? (
-                  <View className="flex flex-row gap-2 bg-gray-300 mt-3 w-36 h-14 justify-center items-center content-center rounded-3xl">
+                  <View className="flex flex-row gap-2 bg-oat mt-3 w-36 h-14 justify-center items-center content-center rounded-full">
                     {tab === "home" ? (
                       <House />
                     ) : tab === "search" ? (
@@ -49,7 +49,7 @@ export default function TabLayout() {
                     <Text>{tab.charAt(0).toUpperCase() + tab.slice(1)}</Text>
                   </View>
                 ) : (
-                  <View className="w-36 h-12 justify-center mt-3 items-center rounded-3xl">
+                  <View className="w-36 h-12 justify-center mt-3 items-center rounded-full">
                     <Text className="text-gray-500">
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </Text>

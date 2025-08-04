@@ -3,8 +3,8 @@ module.exports = {
   content: [
     "./app/**/*",
     "./app/**/*.{js,jsx,ts,tsx}",
-    "./shared/**/*",
-    "./shared/**/*.{js,jsx,ts,tsx}",
+    "./app/components/**/*",
+    "./app/components/**/*.{js,jsx,ts,tsx}",
   ],
   presets: [require("nativewind/preset")],
   theme: {
@@ -14,6 +14,7 @@ module.exports = {
         blue: "#3a5199",
         light: "#ffffff",
         gray: "#d5d6d2",
+        error: "#ff0000",
       },
     },
   },

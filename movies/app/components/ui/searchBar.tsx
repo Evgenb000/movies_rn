@@ -1,3 +1,4 @@
+import { colors } from "@/assets/const/colors";
 import React from "react";
 import { View } from "react-native";
 import { Searchbar } from "react-native-paper";
@@ -11,8 +12,8 @@ export default function SearchBar() {
         placeholder="Search"
         onChangeText={setSearchQuery}
         value={searchQuery}
-        style={{ backgroundColor: "#cdbea7" }}
-        inputStyle={{ color: "#323030" }}
+        style={{ backgroundColor: colors.light }}
+        inputStyle={{ color: colors.dark }}
       />
     </View>
   );

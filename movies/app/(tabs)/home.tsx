@@ -4,8 +4,8 @@ import SearchBar from "../components/ui/searchBar";
 
 export default function Home() {
   return (
-    <View className="flex-1 bg-[#323030] pt-20">
-      <Text className="text-2xl text-center text-gold">Movies</Text>
+    <View className="flex-1 bg-dark pt-20">
+      <Text className="text-2xl text-center text-light">Movies</Text>
       <SearchBar />
       <ScrollView></ScrollView>
     </View>

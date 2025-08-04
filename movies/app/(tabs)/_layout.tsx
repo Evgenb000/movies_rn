@@ -23,7 +23,7 @@ export default function TabLayout() {
           height: 48,
           position: "absolute",
           overflow: "hidden",
-          borderWidth: 1,
+          borderWidth: 0,
           borderColor: "#000",
         },
       }}
@@ -38,7 +38,7 @@ export default function TabLayout() {
               headerShown: false,
               tabBarIcon: ({ focused }) =>
                 focused ? (
-                  <View className="flex flex-row gap-2 bg-oat mt-3 w-36 h-14 justify-center items-center content-center rounded-full">
+                  <View className="flex flex-row gap-2 bg-blue mt-3 w-36 h-14 justify-center items-center content-center rounded-full">
                     {tab === "home" ? (
                       <House />
                     ) : tab === "search" ? (
@@ -50,7 +50,7 @@ export default function TabLayout() {
                   </View>
                 ) : (
                   <View className="w-36 h-12 justify-center mt-3 items-center rounded-full">
-                    <Text className="text-gray-500">
+                    <Text className="text-blue">
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </Text>
                   </View>

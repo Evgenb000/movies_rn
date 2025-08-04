@@ -10,10 +10,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bordo: "#882426",
-        oat: "#cdbea7",
-        ash: "#323030",
-        gold: "#c29545",
+        dark: "#2f2e33",
+        blue: "#3a5199",
+        light: "#ffffff",
+        gray: "#d5d6d2",
       },
     },
   },

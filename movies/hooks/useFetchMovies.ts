@@ -34,6 +34,7 @@ const useFetchMovies = <T>(
     if (autoFetch) {
       fetchMoviesData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { data, loading, error, refetch: fetchMoviesData, reset };

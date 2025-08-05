@@ -41,7 +41,7 @@ export default function Search() {
       ) : movies && movies.results ? (
         <View>
           <Text className="text-2xl text-light font-bold mt-4 ml-4">
-            Latest Movies:
+            Search Results:
           </Text>
 
           <FlatList

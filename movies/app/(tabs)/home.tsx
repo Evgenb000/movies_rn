@@ -3,7 +3,6 @@ import { fetchMovies } from "@/services/api-movies";
 import React from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import CardMovie from "../components/shared/cardMovie";
-import SearchBar from "../components/ui/searchBar";
 
 export default function Home() {
   const {
@@ -13,7 +12,7 @@ export default function Home() {
   } = useFetchMovies(() => fetchMovies({ query: "" }));
 
   return (
-    <View className="flex-1 bg-dark pt-20">
+    <View className="flex-1 bg-dark pt-12">
       <Text className="text-2xl text-center text-light">Movies</Text>
       {moviesLoading ? (
         <ActivityIndicator size="large" color={"#fff"} />
@@ -23,7 +22,6 @@ export default function Home() {
         </Text>
       ) : movies && movies.results ? (
         <View>
-          <SearchBar />
           <Text className="text-2xl text-light font-bold mt-4 ml-4">
             Latest Movies:
           </Text>
@@ -42,6 +40,7 @@ export default function Home() {
             )}
             keyExtractor={(item) => item.id.toString()}
             numColumns={3}
+            contentContainerStyle={{ paddingBottom: 240 }}
             columnWrapperStyle={{
               justifyContent: "space-between",
               gap: 20,

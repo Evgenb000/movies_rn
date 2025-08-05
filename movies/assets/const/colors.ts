@@ -3,4 +3,5 @@ export const colors = {
   blue: "#3a5199",
   light: "#ffffff",
   gray: "#d5d6d2",
+  yellow: "#ffcc00",
 };

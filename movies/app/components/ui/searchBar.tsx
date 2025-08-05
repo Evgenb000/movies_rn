@@ -3,9 +3,12 @@ import React from "react";
 import { View } from "react-native";
 import { Searchbar } from "react-native-paper";
 
-export default function SearchBar() {
-  const [searchQuery, setSearchQuery] = React.useState("");
+interface Props {
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+}
 
+export default function SearchBar({ searchQuery, setSearchQuery }: Props) {
   return (
     <View className="mx-5 mt-4">
       <Searchbar

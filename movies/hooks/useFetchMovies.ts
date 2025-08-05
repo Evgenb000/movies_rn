@@ -27,6 +27,7 @@ const useFetchMovies = <T>(
     setData(null);
     setLoading(false);
     setError(null);
+    fetchMoviesData();
   };
 
   React.useEffect(() => {
@@ -35,7 +36,7 @@ const useFetchMovies = <T>(
     }
   }, []);
 
-  return { data, loading, error, refresh: fetchMoviesData, reset };
+  return { data, loading, error, refetch: fetchMoviesData, reset };
 };
 
 export default useFetchMovies;

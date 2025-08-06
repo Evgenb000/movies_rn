@@ -1,5 +1,6 @@
 import useFetchMovies from "@/hooks/useFetchMovies";
 import { fetchMovies } from "@/services/api-movies";
+import { updateSearchCount } from "@/services/appwrite";
 import React from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import CardMovie from "../components/shared/cardMovie";
@@ -19,6 +20,10 @@ export default function Search() {
     const fTimeOut = setTimeout(async () => {
       if (searchQuery.trim()) {
         await refetchMovies();
+
+        if (movies?.results?.length > 0 && movies?.results?.[0]) {
+          await updateSearchCount(searchQuery, movies?.results?.[0]);
+        }
       } else {
         resetMovies();
       }

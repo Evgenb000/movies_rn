@@ -24,23 +24,27 @@ export default function CardMovie({
         source={{
           uri: imageUrl
             ? `https://image.tmdb.org/t/p/w500${imageUrl}`
-            : `https://via.placeholder.com/600x400/1a1a1a/fffffff.png`,
+            : `https://via.placeholder.com/600x400/1a1a1a/ffffff.png`,
         }}
         className="w-full h-48 rounded-md"
-        resizeMode="contain"
+        resizeMode="cover"
       />
-      <Text className="text-light">{title}</Text>
+      <Text className="text-light" numberOfLines={2}>
+        {title}
+      </Text>
       <View className="flex flex-row gap-1 items-center">
         {rating && (
           <View className="flex flex-row gap-1 items-center">
             <Star size={16} color={colors.yellow} />
             <Text className="text-light text-sm">
-              {rating} {votes && `(${votes})`}
+              {rating.toFixed(1)} {votes && `(${votes.toLocaleString()})`}
             </Text>
           </View>
         )}
       </View>
-      <Text className="text-blue text-right text-sm">{releaseDate} </Text>
+      {releaseDate && (
+        <Text className="text-blue text-right text-sm">{releaseDate}</Text>
+      )}
     </View>
   );
 }

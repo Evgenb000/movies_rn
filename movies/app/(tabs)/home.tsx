@@ -1,6 +1,8 @@
 import useFetchMovies from "@/hooks/useFetchMovies";
+import { groupMoviesByTitle } from "@/hooks/useGroupPopularMovies";
 import { fetchMovies } from "@/services/api-movies";
-import React from "react";
+import { getPopularMovies } from "@/services/appwrite";
+import React, { useMemo } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import CardMovie from "../components/shared/cardMovie";
 
@@ -10,6 +12,17 @@ export default function Home() {
     loading: moviesLoading,
     error: moviesError,
   } = useFetchMovies(() => fetchMovies({ query: "" }));
+
+  const {
+    data: popularMovies,
+    loading: popularMoviesLoading,
+    error: popularMoviesError,
+  } = useFetchMovies(getPopularMovies);
+
+  const groupedMovies = useMemo(() => {
+    if (!popularMovies) return [];
+    return groupMoviesByTitle(popularMovies);
+  }, [popularMovies]);
 
   return (
     <View className="flex-1 bg-dark pt-12">
@@ -22,6 +35,38 @@ export default function Home() {
         </Text>
       ) : movies && movies.results ? (
         <View>
+          {groupedMovies && (
+            <>
+              <View>
+                <Text className="text-2xl text-light font-bold mt-4 ml-4">
+                  Popular Movies:
+                </Text>
+              </View>
+
+              <FlatList
+                data={groupedMovies}
+                renderItem={({ item }) => (
+                  <View className="mt-4 ml-5">
+                    <CardMovie
+                      title={item.movie_title}
+                      imageUrl={item.poster_url}
+                    />
+                  </View>
+                )}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item) => item.movie_id.toString()}
+                contentContainerStyle={{ paddingBottom: 40 }}
+                ListEmptyComponent={
+                  !popularMoviesLoading && !popularMoviesError ? (
+                    <Text className="text-light text-center">
+                      No popular movies found
+                    </Text>
+                  ) : null
+                }
+              />
+            </>
+          )}
           <Text className="text-2xl text-light font-bold mt-4 ml-4">
             Latest Movies:
           </Text>

@@ -5,10 +5,10 @@ import { Image, Text, View } from "react-native";
 
 interface Props {
   title: string;
-  rating: number;
-  votes: number;
-  releaseDate: string;
   imageUrl: string;
+  rating?: number;
+  votes?: number;
+  releaseDate?: string;
 }
 
 export default function CardMovie({
@@ -31,10 +31,14 @@ export default function CardMovie({
       />
       <Text className="text-light">{title}</Text>
       <View className="flex flex-row gap-1 items-center">
-        <Star size={12} color={colors.yellow}></Star>
-        <Text className="text-light text-sm ">
-          {rating} ({votes} votes)
-        </Text>
+        {rating && (
+          <View className="flex flex-row gap-1 items-center">
+            <Star size={16} color={colors.yellow} />
+            <Text className="text-light text-sm">
+              {rating} {votes && `(${votes})`}
+            </Text>
+          </View>
+        )}
       </View>
       <Text className="text-blue text-right text-sm">{releaseDate} </Text>
     </View>

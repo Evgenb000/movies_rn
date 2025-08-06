@@ -1,7 +1,8 @@
 import useFetchMovies from "@/hooks/useFetchMovies";
+import { groupMoviesByTitle } from "@/hooks/useGroupPopularMovies";
 import { fetchMovies } from "@/services/api-movies";
-import { updateSearchCount } from "@/services/appwrite";
-import React from "react";
+import { getPopularMovies, updateSearchCount } from "@/services/appwrite";
+import React, { useMemo } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import CardMovie from "../components/shared/cardMovie";
 import SearchBar from "../components/ui/searchBar";
@@ -16,14 +17,16 @@ export default function Search() {
   } = useFetchMovies(() => fetchMovies({ query: searchQuery }), false);
   const [searchQuery, setSearchQuery] = React.useState("");
 
+  const {
+    data: popularMovies,
+    loading: popularMoviesLoading,
+    error: popularMoviesError,
+  } = useFetchMovies(getPopularMovies);
+
   React.useEffect(() => {
     const fTimeOut = setTimeout(async () => {
       if (searchQuery.trim()) {
         await refetchMovies();
-
-        if (movies?.results?.length > 0 && movies?.results?.[0]) {
-          await updateSearchCount(searchQuery, movies?.results?.[0]);
-        }
       } else {
         resetMovies();
       }
@@ -32,6 +35,21 @@ export default function Search() {
     return () => clearTimeout(fTimeOut);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
+
+  React.useEffect(() => {
+    if (
+      movies?.results?.length > 0 &&
+      movies?.results?.[0] &&
+      searchQuery !== ""
+    ) {
+      updateSearchCount(searchQuery, movies?.results?.[0]);
+    }
+  }, [movies, searchQuery]);
+
+  const groupedMovies = useMemo(() => {
+    if (!popularMovies) return [];
+    return groupMoviesByTitle(popularMovies);
+  }, [popularMovies]);
 
   return (
     <View className="flex-1 bg-dark pt-12">
@@ -45,6 +63,35 @@ export default function Search() {
         </Text>
       ) : movies && movies.results ? (
         <View>
+          {groupedMovies ? (
+            <FlatList
+              data={groupedMovies}
+              renderItem={({ item }) => (
+                <View>
+                  <CardMovie
+                    title={item.movie_title}
+                    imageUrl={item.poster_url}
+                  />
+                </View>
+              )}
+              horizontal
+              keyExtractor={(item) => item.movie_id.toString()}
+              contentContainerStyle={{ paddingBottom: 240 }}
+              ListEmptyComponent={
+                !popularMoviesLoading && !popularMoviesError ? (
+                  <Text className="text-light text-center">
+                    {searchQuery.trim()
+                      ? "No movies found"
+                      : "Search for a movie"}
+                  </Text>
+                ) : null
+              }
+            />
+          ) : (
+            <Text className="text-light text-center">
+              {searchQuery.trim() ? "No movies found" : "Search for a movie"}
+            </Text>
+          )}
           <Text className="text-2xl text-light font-bold mt-4 ml-4">
             Search Results:
           </Text>

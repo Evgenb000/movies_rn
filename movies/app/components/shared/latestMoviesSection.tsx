@@ -1,6 +1,6 @@
+import { Movie } from "@/assets/types/appwrite";
 import React from "react";
 import { FlatList, Text, View } from "react-native";
-import { Movie } from "@/assets/types/appwrite";
 import CardMovie from "./cardMovie";
 
 interface LatestMoviesSectionProps {

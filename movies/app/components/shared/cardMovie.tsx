@@ -1,4 +1,5 @@
 import { colors } from "@/assets/const/colors";
+import { clsx } from "clsx";
 import { Link } from "expo-router";
 import { Star } from "lucide-react-native";
 import React from "react";
@@ -26,7 +27,9 @@ export default function CardMovie({
   return (
     <Link href={`/movie/${index}`} asChild>
       <TouchableOpacity>
-        <View className="flex gap-1 w-32 min-h-72">
+        <View
+          className={clsx("flex gap-1 w-32", rating ? "min-h-72" : "min-h-64")}
+        >
           <View>
             <Image
               source={{
@@ -44,16 +47,14 @@ export default function CardMovie({
           <Text className="text-light" numberOfLines={2}>
             {title}
           </Text>
-          <View className="flex flex-row gap-1 items-center">
-            {rating && (
-              <View className="flex flex-row gap-1 items-center">
-                <Star size={16} color={colors.yellow} />
-                <Text className="text-light text-sm">
-                  {rating.toFixed(1)} {votes && `(${votes.toLocaleString()})`}
-                </Text>
-              </View>
-            )}
-          </View>
+          {rating && (
+            <View className="flex flex-row gap-1 items-center">
+              <Star size={16} color={colors.yellow} />
+              <Text className="text-light text-sm">
+                {rating.toFixed(1)} {votes && `(${votes.toLocaleString()})`}
+              </Text>
+            </View>
+          )}
           {releaseDate && (
             <Text className="text-blue text-right text-sm">{releaseDate}</Text>
           )}

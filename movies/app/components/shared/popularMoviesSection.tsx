@@ -16,7 +16,7 @@ export default function PopularMoviesSection({
   if (groupedMovies?.length === 0) return null;
 
   return (
-    <View className="mb-6">
+    <View>
       <Text className="text-2xl text-light font-bold mx-4 mb-4">
         Popular Movies:
       </Text>

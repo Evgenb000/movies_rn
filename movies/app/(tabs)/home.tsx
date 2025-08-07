@@ -1,4 +1,4 @@
-import useFetchMovies from "@/hooks/useFetchMovies";
+import { useFetchMovies } from "@/hooks/useFetchMovies";
 import { useGroupedMovies } from "@/hooks/useGroupPopularMovies";
 import { fetchMovies } from "@/services/api-movies";
 import { getPopularMovies } from "@/services/appwrite";

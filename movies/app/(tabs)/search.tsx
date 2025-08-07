@@ -1,4 +1,4 @@
-import useFetchMovies from "@/hooks/useFetchMovies";
+import { useFetchMovies } from "@/hooks/useFetchMovies";
 import { fetchMovies } from "@/services/api-movies";
 import { updateSearchCount } from "@/services/appwrite";
 import React from "react";

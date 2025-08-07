@@ -1,4 +1,5 @@
 import { GroupedPopularMovies, PopularMovies } from "@/assets/types/appwrite";
+import { useMemo } from "react";
 
 export const groupMoviesByTitle = (
   data: PopularMovies[]
@@ -31,4 +32,13 @@ export const groupMoviesByTitle = (
   );
 
   return Object.values(grouped).sort((a, b) => b.total_count - a.total_count);
+};
+
+export const useGroupedMovies = (popularMovies: PopularMovies[] | null) => {
+  const groupedMovies = useMemo(() => {
+    if (!popularMovies) return [];
+    return groupMoviesByTitle(popularMovies);
+  }, [popularMovies]);
+
+  return groupedMovies;
 };

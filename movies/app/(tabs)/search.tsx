@@ -61,6 +61,7 @@ export default function Search() {
             renderItem={({ item }) => (
               <View>
                 <CardMovie
+                  index={item.id}
                   title={item.title}
                   rating={item.vote_average}
                   votes={item.vote_count}

@@ -1,4 +1,5 @@
 import { MovieDetail } from "@/assets/types/appwrite";
+import { WatchProvidersResponse } from "@/assets/types/watch-providers";
 
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
@@ -11,7 +12,7 @@ export const TMDB_CONFIG = {
 
 const handleResponse = async (response: Response) => {
   if (!response.ok) {
-    throw new Error("Something went wrong");
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
   return response.json();
 };
@@ -32,6 +33,20 @@ export const fetchMovies = async ({ query }: { query: string }) => {
 export const fetchMovieById = async (movieId: string): Promise<MovieDetail> => {
   const response = await fetch(
     `${TMDB_CONFIG.BASE_URL}/movie/${movieId}?language=en-US`,
+    {
+      method: "GET",
+      headers: TMDB_CONFIG.headers,
+    }
+  );
+
+  return handleResponse(response);
+};
+
+export const fetchWatchProviders = async (
+  movieId: string
+): Promise<WatchProvidersResponse> => {
+  const response = await fetch(
+    `${TMDB_CONFIG.BASE_URL}/movie/${movieId}/watch/providers`,
     {
       method: "GET",
       headers: TMDB_CONFIG.headers,

@@ -49,7 +49,7 @@ export default function CardMovie({
           </Text>
           {rating && (
             <View className="flex flex-row gap-1 items-center">
-              <Star size={16} color={colors.yellow} />
+              <Star size={16} color={colors.yellow} fill={colors.yellow} />
               <Text className="text-light text-sm">
                 {rating.toFixed(1)} {votes && `(${votes.toLocaleString()})`}
               </Text>

@@ -5,6 +5,7 @@ import { useLocalSearchParams } from "expo-router";
 import { Calendar, Clock, DollarSign, Globe, Star } from "lucide-react-native";
 import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import MovieWatchProviders from "../components/shared/watchMovie/watchMovieProviders";
 
 const formatCurrency = (amount: number) => {
   return new Intl.NumberFormat("en-US", {
@@ -131,6 +132,13 @@ export default function Movie() {
           <Text className="text-lg font-semibold mb-3 text-light">
             Overview
           </Text>
+          <View>
+            <MovieWatchProviders
+              movieId={movie.id.toString()}
+              movieTitle={movie.title}
+              countryCode="US"
+            />
+          </View>
           <Text className="text-base leading-6 text-light">
             {movie.overview}
           </Text>
@@ -144,7 +152,7 @@ export default function Movie() {
             {movie.production_companies.map((company) => (
               <View
                 key={company.id}
-                className="p-3 mr-2 mb-2 bg-light rounded-lg"
+                className="p-3 mr-2 mb-2 bg-light rounded-lg justify-center items-center"
               >
                 <Image
                   source={{

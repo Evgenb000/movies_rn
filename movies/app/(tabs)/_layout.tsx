@@ -1,3 +1,4 @@
+import { colors } from "@/assets/const/colors";
 import { tabs } from "@/assets/const/tabs";
 import { Tabs } from "expo-router";
 import { Bookmark, House, Search } from "lucide-react-native";
@@ -40,17 +41,19 @@ export default function TabLayout() {
                 focused ? (
                   <View className="flex flex-row gap-2 bg-blue mt-3 w-36 h-14 justify-center items-center content-center rounded-full">
                     {tab === "home" ? (
-                      <House />
+                      <House color={colors.light} />
                     ) : tab === "search" ? (
-                      <Search />
+                      <Search color={colors.light} />
                     ) : (
-                      tab === "saved" && <Bookmark />
+                      tab === "saved" && <Bookmark color={colors.light} />
                     )}
-                    <Text>{tab.charAt(0).toUpperCase() + tab.slice(1)}</Text>
+                    <Text className="text-light">
+                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    </Text>
                   </View>
                 ) : (
                   <View className="w-36 h-12 justify-center mt-3 items-center rounded-full">
-                    <Text className="text-blue">
+                    <Text className="text-light">
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </Text>
                   </View>

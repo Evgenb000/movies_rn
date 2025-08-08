@@ -69,7 +69,7 @@ const MovieWatchProviders: React.FC<MovieWatchProvidersProps> = ({
     !countryData.flatrate && !countryData.rent && !countryData.buy;
 
   return (
-    <View className="p-4 bg-dark">
+    <View className="bg-dark mb-4">
       <Text className="text-xl font-bold mb-4 text-light">
         Where to Watch &quot;{movieTitle}&quot;
       </Text>

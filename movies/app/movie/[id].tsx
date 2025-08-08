@@ -128,17 +128,19 @@ export default function Movie() {
           </View>
         </View>
 
+        <View>
+          <MovieWatchProviders
+            movieId={movie.id.toString()}
+            movieTitle={movie.title}
+            countryCode="US"
+          />
+        </View>
+
         <View className="mb-6">
           <Text className="text-lg font-semibold mb-3 text-light">
             Overview
           </Text>
-          <View>
-            <MovieWatchProviders
-              movieId={movie.id.toString()}
-              movieTitle={movie.title}
-              countryCode="US"
-            />
-          </View>
+
           <Text className="text-base leading-6 text-light">
             {movie.overview}
           </Text>

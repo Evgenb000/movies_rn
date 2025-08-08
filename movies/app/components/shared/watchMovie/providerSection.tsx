@@ -18,8 +18,8 @@ export const ProviderSection: React.FC<ProviderSectionProps> = ({
   if (!providers || providers.length === 0) return null;
 
   return (
-    <View>
-      <Text className="text-lg font-semibold mb-3 text-light">{title}</Text>
+    <View className="mb-2">
+      <Text className="text-lg font-semibold mb-2 text-light">{title}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View className="flex-row space-x-3 gap-2">
           {providers.map((provider) => (
